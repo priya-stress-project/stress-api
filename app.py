@@ -1,16 +1,14 @@
-@app.route("/predict", methods=["POST"])
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Stress Prediction API Running"
+
+@app.route("/predict")
 def predict():
+    return "Predict API Ready"
 
-    audio_file = request.files["file"]
-
-    filename = audio_file.filename
-
-    audio_file.save(filename)
-
-    feature = extract_features(filename)
-
-    prediction = model.predict([feature])
-
-    return jsonify({
-        "stress": str(prediction[0])
-    })
+if __name__ == "__main__":
+    app.run()
